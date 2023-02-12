@@ -7,33 +7,38 @@
 
 import UIKit
 
-class QuoteDetailsViewController: UIViewController {
+final class QuoteDetailsViewController: UIViewController {
     
+    private let symbolLabel = UILabel()
+    private let nameLabel = UILabel()
+    private let lastLabel = UILabel()
+    private let currencyLabel = UILabel()
+    private let readableLastChangePercentLabel = UILabel()
+    private let favoriteButton = UIButton()
+    
+    private var favoriteButtonWidthConstraint: NSLayoutConstraint!
     private var quote:Quote? = nil
     
-    let symbolLabel = UILabel()
-    let nameLabel = UILabel()
-    let lastLabel = UILabel()
-    let currencyLabel = UILabel()
-    let readableLastChangePercentLabel = UILabel()
-    let favoriteButton = UIButton()
-    
-    
-    
+    var storageManager: StorageService?
     
     init(quote:Quote) {
         super.init(nibName: nil, bundle: nil)
         self.quote = quote
     }
-    
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        storageManager?.unsubscribeFromUpdates(observer: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        storageManager?.subscribeForUpdates(observer: self)
         addSubviews()
         setupAutolayout()
         symbolLabel.text = quote?.symbol
@@ -65,7 +70,8 @@ class QuoteDetailsViewController: UIViewController {
         readableLastChangePercentLabel.layer.borderColor = UIColor.black.cgColor
         readableLastChangePercentLabel.font = .systemFont(ofSize: 30)
         
-        favoriteButton.setTitle("Add to favorites", for: .normal)
+        let favouriteButtonTitle = (quote?.isFavourite == true) ? "Remove from favorites" : "Add to favorites"
+        favoriteButton.setTitle(favouriteButtonTitle, for: .normal)
         favoriteButton.layer.cornerRadius = 6
         favoriteButton.layer.masksToBounds = true
         favoriteButton.layer.borderWidth = 3
@@ -92,6 +98,8 @@ class QuoteDetailsViewController: UIViewController {
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         
         let safeArea = view.safeAreaLayoutGuide
+        
+        favoriteButtonWidthConstraint = favoriteButton.widthAnchor.constraint(equalToConstant: quote?.isFavourite == true ? 220 : 150)
         
         NSLayoutConstraint.activate([
             symbolLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 30),
@@ -121,14 +129,54 @@ class QuoteDetailsViewController: UIViewController {
                         
             favoriteButton.topAnchor.constraint(equalTo: readableLastChangePercentLabel.bottomAnchor, constant: 30),
             favoriteButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 150),
+            favoriteButtonWidthConstraint,
             favoriteButton.heightAnchor.constraint(equalToConstant: 44),
             
         ])
     }
     
     
-    @objc func didPressFavoriteButton(_ sender:UIButton!) {
-        // TODO
+    @objc func didPressFavoriteButton(_ sender: UIButton!) {
+        guard let quote = quote else { return }
+        
+        let favouriteStatus = (quote.isFavourite == true)
+        
+        do {
+            if favouriteStatus {
+                try storageManager?.removeQuote(quote)
+            } else {
+                try storageManager?.addQuote(quote)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+}
+
+// MARK: - StorageManagerObserver
+
+extension QuoteDetailsViewController: StorageManagerObserver {
+    
+    func storageManagerDidUpdate(with newQuotes: [Quote]) {
+        guard let quote = quote else { return }
+        
+        if let index = newQuotes.firstIndex(where: { $0.name == quote.name }) {
+            self.quote = newQuotes[index]
+            favoriteButton.setTitle("Remove from favorites", for: .normal)
+            favoriteButtonWidthConstraint.constant = 220
+            view.layoutIfNeeded()
+        }
+    }
+    
+    func storageManagerDidRemoveQuote(_ quote: Quote?, at indexPath: IndexPath?) {
+        guard var removedQuote = quote else { return }
+        
+        if removedQuote.name == self.quote?.name {
+            removedQuote.isFavourite = false
+            self.quote = removedQuote
+            favoriteButton.setTitle("Add to favorites", for: .normal)
+            favoriteButtonWidthConstraint.constant = 150
+            view.layoutIfNeeded()
+        }
     }
 }

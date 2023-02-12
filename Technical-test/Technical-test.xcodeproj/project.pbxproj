@@ -11,10 +11,15 @@
 		1AA3C89B263AA2030041430A /* QuotesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA3C89A263AA2030041430A /* QuotesListViewController.swift */; };
 		1AA3C8A0263AA2040041430A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AA3C89F263AA2040041430A /* Assets.xcassets */; };
 		1AA3C8A3263AA2040041430A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA3C8A1263AA2040041430A /* LaunchScreen.storyboard */; };
-		1AA3C8B2263AA8360041430A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA3C8B1263AA8360041430A /* DataManager.swift */; };
+		1AA3C8B2263AA8360041430A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA3C8B1263AA8360041430A /* NetworkManager.swift */; };
 		1AA3C8B6263AB26C0041430A /* QuoteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA3C8B5263AB26C0041430A /* QuoteDetailsViewController.swift */; };
 		1AA3C8BA263AB2980041430A /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA3C8B9263AB2980041430A /* Quote.swift */; };
 		1AC78CBF263C6686004D4F8F /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC78CBE263C6686004D4F8F /* Market.swift */; };
+		713DF72E29990B4D00BF2E2C /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713DF72C29990B4D00BF2E2C /* QuoteTableViewCell.swift */; };
+		713DF72F29990B4D00BF2E2C /* QuoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 713DF72D29990B4D00BF2E2C /* QuoteTableViewCell.xib */; };
+		713DF73129992A2900BF2E2C /* DiskStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713DF73029992A2900BF2E2C /* DiskStorageManager.swift */; };
+		713DF7362999525500BF2E2C /* WeakPointerArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713DF7352999525500BF2E2C /* WeakPointerArray.swift */; };
+		713DF73A299972B600BF2E2C /* StorageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713DF739299972B600BF2E2C /* StorageProtocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,10 +29,15 @@
 		1AA3C89F263AA2040041430A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1AA3C8A2263AA2040041430A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AA3C8A4263AA2040041430A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1AA3C8B1263AA8360041430A /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		1AA3C8B1263AA8360041430A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		1AA3C8B5263AB26C0041430A /* QuoteDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteDetailsViewController.swift; sourceTree = "<group>"; };
 		1AA3C8B9263AB2980041430A /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		1AC78CBE263C6686004D4F8F /* Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
+		713DF72C29990B4D00BF2E2C /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
+		713DF72D29990B4D00BF2E2C /* QuoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuoteTableViewCell.xib; sourceTree = "<group>"; };
+		713DF73029992A2900BF2E2C /* DiskStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorageManager.swift; sourceTree = "<group>"; };
+		713DF7352999525500BF2E2C /* WeakPointerArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakPointerArray.swift; sourceTree = "<group>"; };
+		713DF739299972B600BF2E2C /* StorageProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProtocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +70,8 @@
 		1AA3C895263AA2030041430A /* Technical-test */ = {
 			isa = PBXGroup;
 			children = (
-				1AA3C8B0263AA8220041430A /* Manager */,
+				713DF7342999524400BF2E2C /* Utility */,
+				1AA3C8B0263AA8220041430A /* Managers */,
 				1AA3C8AC263AA2D90041430A /* Model */,
 				1AA3C8AB263AA2D10041430A /* View */,
 				1AA3C896263AA2030041430A /* AppDelegate.swift */,
@@ -76,6 +87,8 @@
 			children = (
 				1AA3C89A263AA2030041430A /* QuotesListViewController.swift */,
 				1AA3C8B5263AB26C0041430A /* QuoteDetailsViewController.swift */,
+				713DF72C29990B4D00BF2E2C /* QuoteTableViewCell.swift */,
+				713DF72D29990B4D00BF2E2C /* QuoteTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -89,12 +102,38 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		1AA3C8B0263AA8220041430A /* Manager */ = {
+		1AA3C8B0263AA8220041430A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				1AA3C8B1263AA8360041430A /* DataManager.swift */,
+				713DF738299972A300BF2E2C /* StorageManager */,
+				713DF7372999729500BF2E2C /* NetworkManager */,
 			);
-			path = Manager;
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		713DF7342999524400BF2E2C /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				713DF7352999525500BF2E2C /* WeakPointerArray.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		713DF7372999729500BF2E2C /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				1AA3C8B1263AA8360041430A /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		713DF738299972A300BF2E2C /* StorageManager */ = {
+			isa = PBXGroup;
+			children = (
+				713DF73029992A2900BF2E2C /* DiskStorageManager.swift */,
+				713DF739299972B600BF2E2C /* StorageProtocols.swift */,
+			);
+			path = StorageManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +195,7 @@
 			files = (
 				1AA3C8A3263AA2040041430A /* LaunchScreen.storyboard in Resources */,
 				1AA3C8A0263AA2040041430A /* Assets.xcassets in Resources */,
+				713DF72F29990B4D00BF2E2C /* QuoteTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,11 +207,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AA3C8B6263AB26C0041430A /* QuoteDetailsViewController.swift in Sources */,
+				713DF73A299972B600BF2E2C /* StorageProtocols.swift in Sources */,
 				1AA3C89B263AA2030041430A /* QuotesListViewController.swift in Sources */,
-				1AA3C8B2263AA8360041430A /* DataManager.swift in Sources */,
+				1AA3C8B2263AA8360041430A /* NetworkManager.swift in Sources */,
 				1AA3C8BA263AB2980041430A /* Quote.swift in Sources */,
+				713DF7362999525500BF2E2C /* WeakPointerArray.swift in Sources */,
+				713DF72E29990B4D00BF2E2C /* QuoteTableViewCell.swift in Sources */,
 				1AA3C897263AA2030041430A /* AppDelegate.swift in Sources */,
 				1AC78CBF263C6686004D4F8F /* Market.swift in Sources */,
+				713DF73129992A2900BF2E2C /* DiskStorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
