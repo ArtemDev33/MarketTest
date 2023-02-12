@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Quote {
+struct Quote: Codable, Equatable {
     var symbol:String?
     var name:String?
     var currency:String?
     var readableLastChangePercent:String?
     var last:String?
     var variationColor:String?
-    var myMarket:Market?
+    var isFavourite: Bool?
 }

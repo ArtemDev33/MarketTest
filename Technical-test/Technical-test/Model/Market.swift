@@ -8,7 +8,7 @@
 import Foundation
 
 
-class Market {
-    let marketName:String = "SMI"
-    var quotes:[Quote]? = []
+struct Market: Codable, Equatable {
+    let marketName:String
+    var quotes:[Quote]?
 }
